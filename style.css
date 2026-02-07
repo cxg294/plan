@@ -451,6 +451,48 @@ footer {
         white-space: nowrap;
         padding: 6px 12px;
     }
+
+    /* Space Recovery: Remove vertical line and dots on mobile */
+    .schedule-list {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .schedule-item {
+        padding-left: 0;
+    }
+
+    .schedule-item::before {
+        display: none;
+    }
+
+    .time-column {
+        padding-right: 0.4rem;
+        min-width: 60px;
+    }
+
+    /* Choice UI - Horizontal Scroll (Chip Bar) */
+    .choice-container {
+        gap: 0.6rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 5px 2px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .choice-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .choice-btn {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.85rem;
+        flex: 0 0 auto;
+        white-space: nowrap;
+        text-align: center;
+    }
 }
 
 /* Map Container */
@@ -633,4 +675,36 @@ footer {
     color: var(--primary);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Choice UI (Restaurant Options) */
+.choice-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+    padding: 2px;
+}
+
+.choice-btn {
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.choice-btn:hover {
+    background: rgba(13, 148, 136, 0.05);
+    /* Light teal tint */
+}
+
+.choice-btn.active {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
 }
