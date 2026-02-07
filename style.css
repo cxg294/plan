@@ -67,6 +67,7 @@ h1 {
     font-size: 5rem;
     margin-bottom: 0.5rem;
     text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    line-height: 1.1;
 }
 
 .subtitle {
@@ -382,16 +383,73 @@ footer {
 
 @media (max-width: 768px) {
     h1 {
-        font-size: 3rem;
+        font-size: 3.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
     }
 
     .cards-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .container {
-        margin-top: -2rem;
-        padding: 1rem;
+        margin-top: -2.5rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .timeline {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section {
+        min-height: 400px;
+    }
+
+    .hero-content {
+        padding: 0 10px;
+    }
+
+    .dates {
+        font-size: 1rem;
+    }
+
+    .quick-nav-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .day-tag {
+        font-size: 1.15rem;
+    }
+
+    .glass {
+        padding: 1.5rem 1rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .filter-tabs {
+        overflow-x: auto;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-btn {
+        white-space: nowrap;
+        padding: 6px 12px;
     }
 }
 
