@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 海南【治愈+美学】奢华之旅</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet -->
+    <!-- AMap JS API -->
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: '951e81e1dcbe1bcec90ae6eb160997d6',
+        }
+    </script>
+    <script
+        src="https://webapi.amap.com/maps?v=2.0&key=4f4b242f275c2ed27e2b0af25b4e8717&plugin=AMap.Driving,AMap.Scale,AMap.ToolBar"></script>
+</head>
+
+<body>
+    <div class="bg-gradient"></div>
+
+    <style>
+        :root {
+            --primary: #2A9D8F;
+            --primary-dark: #1F7A6F;
+            --secondary: #E9C46A;
+            --accent: #F4A261;
+            --danger: #E76F51;
+            --text: #264653;
+            --bg: #F0F4F8;
+            --glass: rgba(255, 255, 255, 0.95);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 10px 20px -10px rgba(42, 157, 143, 0.5);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .mcp-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        /* Day Navigation (Tabs) */
+        .day-nav-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 0.5rem 0.5rem 1.5rem;
+            scrollbar-width: none;
+            /* Hide scrollbar Firefox */
+            margin-bottom: 1rem;
+        }
+
+        .day-nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .day-nav-btn {
+            background: white;
+            border: none;
+            border-radius: 16px;
+            padding: 0.8rem 1.2rem;
+            min-width: 100px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: center;
+            flex-shrink: 0;
+            color: var(--text);
+            border: 2px solid transparent;
+        }
+
+        .day-nav-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -5px rgba(42, 157, 143, 0.4);
+        }
+
+        .nav-day-num {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .nav-day-loc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Single Day View */
+        .single-day-view {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .day-header-hero {
+            border-bottom: 2px dashed #eee;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .day-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .weather-pill {
+            background: #E0F7FA;
+            color: #006064;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .stay-pill {
+            background: #FFF3E0;
+            color: #E65100;
+            padding: 0.8rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stay-link {
+            color: inherit;
+            text-decoration: none;
+            margin-left: auto;
+        }
+
+        .prep-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .prep-label {
+            font-weight: 600;
+            color: #888;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .prep-badge {
+            background: #F1F3F5;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Schedule Items */
+        .schedule-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .schedule-card {
+            display: flex;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        /* Timeline Line */
+        .schedule-card::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            /* Adjustment based on time-column width */
+            top: 30px;
+            bottom: -40px;
+            width: 2px;
+            background: #eee;
+            z-index: 0;
+        }
+
+        .schedule-card:last-child::before {
+            display: none;
+        }
+
+        .time-column {
+            flex-shrink: 0;
+            width: 60px;
+            text-align: right;
+            position: relative;
+            z-index: 1;
+        }
+
+        .time-text {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.95rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .time-dots {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            margin-left: auto;
+            position: relative;
+            right: -6px;
+            /* Align with line */
+        }
+
+        .card-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            background: #FAFAFA;
+            border-radius: 16px;
+            overflow: hidden;
+            flex-grow: 1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .schedule-card:hover .card-content-wrapper {
+            transform: translateX(5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            height: 180px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 600px) {
+            .card-content-wrapper {
+                flex-direction: row;
+            }
+
+            .card-image {
+                width: 180px;
+                height: auto;
+            }
+        }
+
+        .card-content {
+            padding: 1.2rem;
+            flex-grow: 1;
+        }
+
+        /* Choice Toggles */
+        .choice-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            background: #eee;
+            padding: 4px;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .choice-btn {
+            border: none;
+            background: transparent;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .choice-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .price-tag {
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.85rem;
+            border: 1px solid var(--primary);
+            padding: 2px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .card-desc {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Detail Sections (Rich Details) */
+        .detail-section {
+            background: white;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #ccc;
+        }
+
+        .detail-section h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-section ul {
+            list-style: none;
+            padding-left: 0.5rem;
+        }
+
+        .detail-section li {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 0.3rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .detail-section li::before {
+            content: "•";
+            color: #ccc;
+            position: absolute;
+            left: 0;
+        }
+
+        .package-section {
+            border-color: var(--secondary);
+            background: #FFFDE7;
+        }
+
+        .package-section h4 {
+            color: #F57F17;
+        }
+
+        .warn-section {
+            border-color: var(--danger);
+            background: #FFEBEE;
+        }
+
+        .warn-section h4 {
+            color: #C62828;
+        }
+
+        .tip-section {
+            border: none;
+            background: transparent;
+            color: #666;
+            font-style: italic;
+            padding: 0;
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Costs */
+        .cost-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .cost-row:last-child {
+            border-bottom: none;
+        }
+
+        .total-row {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #eee;
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary-dark);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Route Overview Map */
+        .route-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.5s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .route-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0 0.5rem;
+        }
+
+        .leaflet-routing-container {
+            display: none !important;
+            /* Hide default instructions panel */
+        }
+
+        .route-header h4 {
+            margin: 0;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+        }
+
+        #map-container {
+            height: 320px;
+            width: 100%;
+            border-radius: 16px;
+            z-index: 1;
+            /* Ensure map is below dropdowns if any */
+        }
+
+        .route-meta {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #888;
+            display: flex;
+            gap: 1rem;
+            padding: 0 0.5rem;
+        }
+
+        /* Custom Popup */
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .leaflet-popup-content {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .popup-content {
+            padding: 8px 12px;
+        }
+
+        .popup-title {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .popup-type {
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1>Hainan 2026</h1>
+            <p class="subtitle">北京 <i class="fa-solid fa-plane"></i> 海口 · 万宁 · 三亚</p>
+            <p class="dates">2026.02.21 - 02.26</p>
+
+            <div class="quick-nav">
+                <a href="#timeline" class="quick-nav-btn"><i class="fa-solid fa-calendar-days"></i> 行程表</a>
+                <a href="#food-collection" class="quick-nav-btn"><i class="fa-solid fa-utensils"></i> 美食图鉴</a>
+                <a href="#cost-breakdown" class="quick-nav-btn"><i class="fa-solid fa-coins"></i> 预算表</a>
+            </div>
+
+            <div class="mcp-badge">
+                <i class="fa-solid fa-robot"></i> Powered by Amadeus & Amap MCP
+            </div>
+            <div id="plan-desc" class="plan-description"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Itinerary Timeline -->
+        <section class="timeline-section">
+            <div id="day-route"></div>
+            <div id="timeline" class="timeline">
+                <!-- Dynamically populated by JS -->
+            </div>
+        </section>
+
+        <!-- Food Collection (New Feature) -->
+        <section class="food-collection-section" id="food-collection">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-utensils"></i> 必吃榜·美食图鉴</h2>
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="万宁">万宁</button>
+                    <button class="filter-btn" data-filter="三亚">三亚</button>
+                </div>
+            </div>
+            <div id="food-grid" class="food-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+
+
+        <!-- Cost Summary -->
+        <section class="cost-section">
+            <div class="cost-card glass mirror">
+                <h2><i class="fa-solid fa-coins"></i> 预算总览 (2人)</h2>
+                <div class="cost-breakdown" id="cost-breakdown">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="total-cost">
+                    <span>预计总花费:</span>
+                    <span id="total-price" class="price-tag">calculating...</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Generated by Agentic AI • Based on projected 2026 pricing</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
