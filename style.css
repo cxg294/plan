@@ -708,3 +708,26 @@ footer {
     color: white;
     box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
 }
+
+/* Side Quest Badge */
+.side-quest {
+    border: 1px dashed var(--primary-color);
+    background: rgba(13, 148, 136, 0.03);
+}
+
+.side-quest .time {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.quest-badge {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 6px;
+    vertical-align: middle;
+    font-weight: normal;
+}

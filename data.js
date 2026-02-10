@@ -141,6 +141,12 @@ const inventory = {
             address: "万宁市石梅湾",
             coords: [110.269721, 18.661732],
             tags: ["Dining", "Western"]
+        },
+        "loc_wuzhizhou": {
+            name: "蜈支洲岛",
+            address: "三亚市海棠区林旺镇后海村",
+            coords: [109.761806, 18.312133],
+            tags: ["Attraction", "Island"]
         }
     },
 
@@ -470,6 +476,23 @@ const inventory = {
                 "建议提前30分钟抵达，享受桑拿和蒸汽浴。",
                 "避免空腹或过饱时进行。"
             ]
+        },
+        "act_wuzhizhou": {
+            name: "蜈支洲岛 (Plus)",
+            price: 1399,
+            locationId: "loc_wuzhizhou",
+            desc: "中国马尔代夫，水质清澈，潜水胜地。(Day 2 备选方案)",
+            img: "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b",
+            packageInfo: [
+                "时长：全天 (09:00 - 17:00)",
+                "推荐：极限玩家套票 (含潜水、动感飞艇、摩托艇等)",
+                "如果不玩项目，仅门船票约 144元/人"
+            ],
+            precautions: [
+                "如启用此备选，需放弃 Day 4 的CDF免税店行程。",
+                "岛上物价较高，建议自备干粮和水。",
+                "最后一班离岛船通常为 17:30。"
+            ]
         }
     }
 };
@@ -522,7 +545,7 @@ const itinerary = [
                 time: "09:30",
                 type: "activity",
                 refId: "act_sailing",
-                title: "加井岛帆船出海"
+                title: "加井岛帆船出海 (备选: 蜈支洲)"
             },
             {
                 time: "13:00",
@@ -569,16 +592,16 @@ const itinerary = [
                 title: "老南洋咖啡简餐"
             },
             {
-                time: "15:00",
+                time: "14:30",
                 type: "activity",
                 refId: "act_surfing",
                 title: "日月湾冲浪私教"
             },
             {
-                time: "18:00",
+                time: "18:30",
                 type: "transport",
                 title: "转场三亚海棠湾",
-                desc: "包车/打车前往三亚 (约1小时)。",
+                desc: "整理行李退房，包车前往三亚 (约1小时)。",
                 refId: "loc_1_hotel"
             },
             {
@@ -588,6 +611,14 @@ const itinerary = [
                 isChoice: true,
                 default: "din_linjie",
                 options: ["din_linjie", "din_68_seafood"]
+            },
+            {
+                time: "21:30",
+                type: "activity",
+                title: "艾迪逊 (EDITION) 观海",
+                desc: "支线任务：步行至隔壁艾迪逊酒店，打卡星空吧或私人海域栈道。",
+                isSideQuest: true,
+                refId: "loc_1_hotel"
             }
         ]
     },
@@ -602,13 +633,15 @@ const itinerary = [
             {
                 time: "09:00",
                 type: "activity",
-                refId: "act_pool",
-                title: "悬浮泳池大片拍摄"
+                title: "Day 4 白天安排",
+                isChoice: true,
+                default: "act_pool",
+                options: ["act_pool", "act_wuzhizhou"]
             },
             {
                 time: "12:00",
                 type: "dining",
-                title: "免税店高效午餐",
+                title: "午餐 (若在岛上则自理)",
                 isChoice: true,
                 default: "din_xiyue",
                 options: ["din_xiyue", "din_yexiaoji"]
@@ -617,13 +650,21 @@ const itinerary = [
                 time: "14:30",
                 type: "activity",
                 refId: "act_shopping",
-                title: "CDF 免税店血拼"
+                title: "CDF 免税店血拼 (Option A)"
             },
             {
                 time: "17:30",
                 type: "activity",
                 refId: "act_spa",
                 title: "酒店 SPA 放松"
+            },
+            {
+                time: "19:00",
+                type: "activity",
+                title: "保利瑰丽 (Rosewood) 天际线",
+                desc: "支线任务：打车前往瑰丽酒店 13F 空中大堂，俯瞰海棠湾全景。",
+                isSideQuest: true,
+                refId: "loc_cdf"
             },
             {
                 time: "20:00",
@@ -651,19 +692,31 @@ const itinerary = [
                 refId: "loc_atlantis_royal"
             },
             {
-                time: "11:00",
-                type: "activity",
-                refId: "act_waterpark",
-                title: "水世界 (无快速通道)"
+                time: "12:30",
+                type: "dining",
+                title: "园区午餐简食",
+                desc: "推荐：鲨鱼之春餐厅 (快餐) 或 BS Kitchen (需出园)",
+                isChoice: false,
+                refId: "loc_atlantis",
+                price: 100
             },
             {
-                time: "17:30",
+                time: "16:00",
+                type: "dining",
+                title: "客房下午茶 (Delivery)",
+                desc: "皇家俱乐部礼遇：提前致电管家送到房间，阳台看海享用。",
+                isChoice: false,
+                refId: "loc_atlantis_royal",
+                price: 0
+            },
+            {
+                time: "19:00",
                 type: "dining",
                 refId: "din_royal_lounge",
                 title: "酒廊 Happy Hour"
             },
             {
-                time: "19:30",
+                time: "20:30",
                 type: "activity",
                 refId: "act_aquarium",
                 title: "夜游水族馆"
@@ -692,11 +745,12 @@ const itinerary = [
 // Exposure
 window.travelData = {
     meta: {
-        title: "2026春节·万宁三亚【治愈+美学】",
+        title: "",
         travelers: 2,
         baseSettings: {
             diningBudget: 600, // per day per person
-            transportBudget: 1500 // total
+            transportBudget: 1500, // total
+            hotelTotal: 11467 // Blossom*2 + 1Hotel*2 + Atlantis*1
         }
     },
     inventory,

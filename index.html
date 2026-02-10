@@ -569,6 +569,175 @@
             font-size: 0.8rem;
             color: #666;
         }
+
+        /* ============================================= */
+        /* 手机端全面优化 - 减少层级、更紧凑 */
+        /* ============================================= */
+        @media (max-width: 600px) {
+
+            /* 整体布局紧凑化 */
+            .single-day-view {
+                padding: 0;
+            }
+
+            .day-header-hero {
+                padding: 1rem 0.5rem;
+            }
+
+            .day-header-hero h2 {
+                font-size: 1.3rem;
+            }
+
+            /* 时间轴精简：去掉竖线和圆点 */
+            .schedule-card::before {
+                display: none;
+            }
+
+            .time-dots {
+                display: none;
+            }
+
+            .schedule-list {
+                gap: 1rem;
+                padding-left: 0;
+                border-left: none;
+            }
+
+            /* 卡片扁平化 */
+            .schedule-card {
+                gap: 0.6rem;
+            }
+
+            .time-column {
+                width: 48px;
+                min-width: 48px;
+                padding-right: 0;
+            }
+
+            .time-text {
+                font-size: 0.85rem;
+            }
+
+            /* 隐藏大图，节省空间 */
+            .card-image {
+                display: none;
+            }
+
+            .card-content-wrapper {
+                border-radius: 12px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            }
+
+            .card-content {
+                padding: 0.8rem;
+            }
+
+            .card-header {
+                margin-bottom: 0.3rem;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+
+            .card-title {
+                font-size: 0.95rem;
+            }
+
+            .card-actions {
+                gap: 0.3rem;
+            }
+
+            .price-tag {
+                font-size: 0.75rem;
+                padding: 1px 6px;
+            }
+
+            .nav-link {
+                font-size: 0.75rem;
+                padding: 1px 6px;
+            }
+
+            .card-desc {
+                font-size: 0.85rem;
+                margin-bottom: 0.5rem;
+                line-height: 1.4;
+            }
+
+            /* 详情区域精简 */
+            .detail-section {
+                padding: 0.5rem 0.6rem;
+                margin-top: 0.5rem;
+            }
+
+            .detail-section h4 {
+                font-size: 0.8rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .detail-section li {
+                font-size: 0.78rem;
+                margin-bottom: 0.2rem;
+            }
+
+            /* 选择按钮紧凑 */
+            .choice-container {
+                margin-bottom: 0.5rem;
+                padding: 3px;
+            }
+
+            .choice-btn {
+                padding: 4px 10px;
+                font-size: 0.78rem;
+            }
+
+            /* 准备清单横排紧凑 */
+            .prep-container {
+                gap: 0.3rem;
+                flex-wrap: wrap;
+            }
+
+            .prep-badge {
+                font-size: 0.75rem;
+                padding: 2px 6px;
+            }
+
+            /* 地图区域 */
+            #map-container {
+                height: 200px;
+                border-radius: 12px;
+            }
+
+            .route-card {
+                padding: 0.6rem;
+                border-radius: 14px;
+                margin-bottom: 1rem;
+            }
+
+            .route-header h4 {
+                font-size: 0.95rem;
+            }
+
+            /* 费用面板紧凑 */
+            .cost-panel {
+                padding: 1rem;
+                border-radius: 16px;
+            }
+
+            /* 下榻信息 */
+            .stay-pill {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.8rem;
+            }
+
+            /* 支线任务边框 */
+            .side-quest {
+                border-width: 1px;
+            }
+
+            .quest-badge {
+                font-size: 0.65rem;
+                padding: 1px 4px;
+            }
+        }
     </style>
     <header class="hero-section">
         <div class="hero-content">
@@ -582,9 +751,7 @@
                 <a href="#cost-breakdown" class="quick-nav-btn"><i class="fa-solid fa-coins"></i> 预算表</a>
             </div>
 
-            <div class="mcp-badge">
-                <i class="fa-solid fa-robot"></i> Powered by Amadeus & Amap MCP
-            </div>
+
             <div id="plan-desc" class="plan-description"></div>
         </div>
     </header>

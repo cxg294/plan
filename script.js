@@ -316,6 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Handle entity resolution failure
             if (!entity) entity = { name: item.title || 'Unknown', desc: item.desc || '' };
 
+            let badgeHtml = '';
+            if (item.isSideQuest) {
+                badgeHtml = '<span class="quest-badge">支线</span>';
+            }
+
             // Navigation
             let navBtn = '';
             let locationEntity = null;
@@ -345,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             return `
-                <div class="schedule-card fade-in-up">
+                <div class="schedule-card fade-in-up ${item.isSideQuest ? 'side-quest' : ''}">
                     <div class="time-column">
                         <span class="time-text">${item.time}</span>
                         <div class="time-dots"></div>
@@ -355,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="card-content">
                             ${choiceHtml}
                             <div class="card-header">
-                                <h3 class="card-title">${title}</h3>
+                                <h3 class="card-title">${badgeHtml}${title}</h3>
                                 <div class="card-actions">
                                     ${priceTag}
                                     ${navBtn}
@@ -375,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('') : '';
 
         timelineEl.innerHTML = `
-        <div class="single-day-view">
+            <div class="single-day-view">
             <div class="day-header-hero">
                 <div class="day-title-row">
                     <h2>${day.date}</h2>
@@ -386,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="schedule-list">${scheduleHtml}</div>
         </div>
-        `;
+            `;
 
         // Attach Listeners for Choice Buttons
         timelineEl.querySelectorAll('.choice-btn').forEach(btn => {
@@ -404,11 +409,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // RENDER: Costs
     // ------------------------------------------------------------------
     function calculateCost() {
-        let hotelCost = 11200;
+        let hotelCost = meta.baseSettings ? (meta.baseSettings.hotelTotal || 0) : 0;
         let diningCost = 0;
         let activityCost = 0;
-        const flightCost = 5500;
-        const transportCost = meta.baseSettings.transportBudget;
+        const transportCost = meta.baseSettings ? (meta.baseSettings.transportBudget || 1500) : 1500;
 
         itinerary.forEach((day, dIdx) => {
             day.schedule.forEach((item, iIdx) => {
@@ -430,17 +434,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (expensesEl) {
             expensesEl.innerHTML = `
-                <div class="cost-row"><span><i class="fa-solid fa-plane"></i> 机票 (预估)</span><span>¥${flightCost}</span></div>
-                <div class="cost-row"><span><i class="fa-solid fa-hotel"></i> 酒店 (5晚)</span><span>¥${hotelCost}</span></div>
-                <div class="cost-row"><span><i class="fa-solid fa-utensils"></i> 餐饮 (点单)</span><span>¥${diningCost}</span></div>
-                <div class="cost-row"><span><i class="fa-solid fa-ticket"></i> 活动 & 门票</span><span>¥${activityCost}</span></div>
-                <div class="cost-row"><span><i class="fa-solid fa-car"></i> 交通预留</span><span>¥${transportCost}</span></div>
-                <div class="total-row"><span>总计 (2人)</span><span>¥${(flightCost + hotelCost + diningCost + activityCost + transportCost).toLocaleString()}</span></div>
-            `;
+            <div class="cost-row"><span><i class="fa-solid fa-hotel"></i> 酒店费用</span><span>¥${hotelCost.toLocaleString()}</span></div>
+                <div class="cost-row"><span><i class="fa-solid fa-utensils"></i> 餐饮 (点单)</span><span>¥${diningCost.toLocaleString()}</span></div>
+                <div class="cost-row"><span><i class="fa-solid fa-ticket"></i> 活动 & 门票</span><span>¥${activityCost.toLocaleString()}</span></div>
+                <div class="cost-row"><span><i class="fa-solid fa-car"></i> 交通预留</span><span>¥${transportCost.toLocaleString()}</span></div>
+                <div class="total-row"><span>总计 (2人)</span><span>¥${(hotelCost + diningCost + activityCost + transportCost).toLocaleString()}</span></div>
+        `;
         }
 
         if (totalCostEl) {
-            const total = flightCost + hotelCost + diningCost + activityCost + transportCost;
+            const total = hotelCost + diningCost + activityCost + transportCost;
             totalCostEl.textContent = `¥${total.toLocaleString()}`;
         }
     }
@@ -475,7 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         `<span class="city-badge">万宁</span>`;
 
                     return `
-                    <div class="food-card fade-in-up" onclick="window.open('${getAmapLink(loc)}', '_blank')">
+            <div class="food-card fade-in-up" onclick="window.open('${getAmapLink(loc)}', '_blank')">
                         <div class="food-img" style="background-image: url('${item.img || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4'}')">
                             <span class="food-tag">${item.type}</span>
                         </div>
@@ -490,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${item.tips ? `<div class="food-tips"><i class="fa-solid fa-thumbs-up"></i> ${item.tips}</div>` : ''}
                         </div>
                     </div>
-                    `;
+            `;
                 }).join('');
         };
 
