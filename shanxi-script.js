@@ -100,3 +100,62 @@ function initScrollAnimations() {
         observer.observe(item);
     });
 }
+
+// ============================
+// 方案 A/B 切换
+// ============================
+let currentPlan = 'a';
+
+/** 切换到指定方案 */
+function switchPlan(plan) {
+    if (plan === currentPlan) return;
+    currentPlan = plan;
+
+    const planA = document.getElementById('planA');
+    const planB = document.getElementById('planB');
+    const planSwitch = document.getElementById('planSwitch');
+    const planDesc = document.getElementById('planDesc');
+    const labels = document.querySelectorAll('.plan-toggle-label');
+
+    if (plan === 'a') {
+        planA.classList.remove('hidden');
+        planB.classList.add('hidden');
+        planSwitch.classList.remove('plan-b');
+        planDesc.textContent = '方案A：太原博物院+晋祠+平遥 · 太原住1晚';
+    } else {
+        planA.classList.add('hidden');
+        planB.classList.remove('hidden');
+        planSwitch.classList.add('plan-b');
+        planDesc.textContent = '方案B：晋祠+平遥+乔家大院 · 平遥住2晚 · 零绕路';
+    }
+
+    // 更新label高亮
+    labels.forEach(l => {
+        l.classList.toggle('active', l.dataset.plan === plan);
+    });
+
+    // 更新Hero区域的统计数据
+    updateHeroStats(plan);
+
+    // 滚动到顶部
+    document.getElementById('planToggle').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/** 切换方案（toggle按钮） */
+function togglePlan() {
+    switchPlan(currentPlan === 'a' ? 'b' : 'a');
+}
+
+/** 更新Hero区的统计数据 */
+function updateHeroStats(plan) {
+    const stats = document.querySelectorAll('.hero-stats .stat span');
+    if (plan === 'a') {
+        // 方案A: 里程1174km, 人均¥1,482
+        if (stats[2]) stats[2].textContent = '1,174km';
+        if (stats[3]) stats[3].textContent = '人均¥1,482';
+    } else {
+        // 方案B: 里程~1100km, 人均¥1,554
+        if (stats[2]) stats[2].textContent = '~1,100km';
+        if (stats[3]) stats[3].textContent = '人均¥1,554';
+    }
+}

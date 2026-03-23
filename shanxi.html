@@ -39,7 +39,16 @@
 
     <main class="container">
 
-        <!-- 路线总览（紧凑横向） -->
+        <!-- 方案切换器 -->
+        <div class="plan-toggle" id="planToggle">
+            <span class="plan-toggle-label active" data-plan="a" onclick="switchPlan('a')">🅰️ 太原深度</span>
+            <div class="plan-toggle-switch" id="planSwitch" onclick="togglePlan()"></div>
+            <span class="plan-toggle-label" data-plan="b" onclick="switchPlan('b')">🅱️ 乔家+晋祠</span>
+        </div>
+        <div class="plan-toggle-desc" id="planDesc">方案A：太原博物院+晋祠+平遥 · 太原住1晚</div>
+
+        <!-- ========== 方案A 路线 ========== -->
+        <div class="plan-content plan-a" id="planA">
         <section id="route" class="section">
             <h2 class="section-title"><i class="fa-solid fa-route"></i> 自驾路线</h2>
             <div class="route-compact">
@@ -441,7 +450,7 @@
             </div>
         </section>
 
-        <!-- 预算 -->
+        <!-- 方案A 预算 -->
         <section id="budget" class="section">
             <h2 class="section-title"><i class="fa-solid fa-coins"></i> 费用总览</h2>
             <div class="budget-card">
@@ -501,6 +510,433 @@
                 </div>
             </div>
         </section>
+        </div><!-- /plan-a -->
+
+        <!-- ========== 方案B ========== -->
+        <div class="plan-content plan-b hidden" id="planB">
+        <section class="section">
+            <h2 class="section-title"><i class="fa-solid fa-route"></i> 自驾路线</h2>
+            <div class="route-compact">
+                <div class="rc-node">🏙️ 北京</div>
+                <div class="rc-arrow"><span>492km<br>5.5h</span><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="rc-node">⛩️ 晋祠</div>
+                <div class="rc-arrow"><span>34km<br>46m</span><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="rc-node">🏯 平遥</div>
+                <div class="rc-arrow"><span>24km<br>33m</span><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="rc-node">🏘️ 乔家</div>
+                <div class="rc-arrow return"><span>559km<br>6h</span><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="rc-node">🏙️ 北京</div>
+            </div>
+        </section>
+
+        <!-- Plan B · Day 1 -->
+        <section class="section day-section">
+            <div class="day-header">
+                <div class="day-number">DAY 1</div>
+                <div class="day-info">
+                    <h2>4月4日 · 周六</h2>
+                    <p class="day-theme">北京 → 晋祠（不进太原市区）→ 平遥</p>
+                </div>
+                <div class="day-weather">☀️ 4~20°C</div>
+            </div>
+            <div class="timeline">
+                <div class="tl-item drive">
+                    <div class="tl-time">08:00</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-car"></i></div>
+                        <div class="tl-body">
+                            <h3>北京出发</h3>
+                            <p>G4京港澳 → G5京昆 → 太原绕城 → 晋祠出口</p>
+                            <div class="tl-tag">10:00 保定段服务区休息 · 换人开</div>
+                            <div class="tl-tip">💡 走绕城高速直达晋祠，不进太原市区</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item milestone">
+                    <div class="tl-time">13:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+                        <div class="tl-body">
+                            <h3>抵达晋祠</h3>
+                            <p>全程约 492km，5.5小时 · 绕城高速直达</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item food">
+                    <div class="tl-time">13:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card has-img">
+                        <img class="tl-card-img" src="https://store.is.autonavi.com/showpic/acd726899a49f076cb0f2cf57cd887fa" alt="晋祠家宴">
+                        <div class="tl-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="tl-body">
+                            <h3>晋祠家宴 <span class="rating">⭐ 4.4</span></h3>
+                            <p class="address"><i class="fa-solid fa-location-dot"></i> 晋祠公交总站旁（晋源区）</p>
+                            <div class="food-tags">
+                                <span class="food-tag must">难老泉水炖羊蝎子</span>
+                                <span class="food-tag">红烧黄河鲤鱼</span>
+                                <span class="food-tag">栲栳栳</span>
+                                <span class="food-tag">糖醋丸子</span>
+                            </div>
+                            <div class="tl-price">人均 ¥37 · 4人约 ¥150</div>
+                            <div class="tl-tip">💡 就在景区门口，先吃饱再逛晋祠</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item sight">
+                    <div class="tl-time">14:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-torii-gate"></i></div>
+                        <div class="tl-body">
+                            <h3>晋祠景区 <span class="rating">⭐ 4.9</span></h3>
+                            <p class="address"><i class="fa-solid fa-location-dot"></i> 晋源区古唐路</p>
+                            <p>🏛️ 中国最早皇家祭祀园林<br>三绝：难老泉 · 侍女像 · 周柏<br>三宝：圣母殿 · 鱼沼飞梁 · 献殿</p>
+                            <div class="tl-meta">
+                                <span class="meta-item">¥80/人</span>
+                                <span class="meta-item">2.5小时从容看完</span>
+                            </div>
+                            <div class="tl-price">4人门票 ¥320</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item drive">
+                    <div class="tl-time">17:00</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-car"></i></div>
+                        <div class="tl-body">
+                            <h3>自驾 晋祠 → 平遥</h3>
+                            <p>滨河路南下 → G5京昆高速 · 约34km · 46min</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item hotel">
+                    <div class="tl-time">18:00</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-bed"></i></div>
+                        <div class="tl-body">
+                            <h3>🏨 入住 桔子酒店（平遥古城店）<span class="rating">⭐ 4.9</span></h3>
+                            <p class="address"><i class="fa-solid fa-location-dot"></i> 康宁街47号（古城南门外）</p>
+                            <div class="tl-meta">
+                                <span class="meta-item">🅿️ 自带停车场</span>
+                                <span class="meta-item">华住系</span>
+                                <span class="meta-item">连住2晚</span>
+                            </div>
+                            <div class="tl-price">¥426/间 × 2间 × 2晚 = ¥1,704</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item food">
+                    <div class="tl-time">18:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card has-img">
+                        <img class="tl-card-img" src="https://aos-comment.amap.com/B0FFKQRO3P/comment/B7503D52_15A7_41FF_BBDD_7290FF664FB8_L0_001_2016_113_1761096719395_46837789.jpg" alt="洪武记饭店">
+                        <div class="tl-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="tl-body">
+                            <h3>洪武记饭店 <span class="rating">⭐ 4.8</span></h3>
+                            <p class="address"><i class="fa-solid fa-location-dot"></i> 古城南大街84号</p>
+                            <div class="food-tags">
+                                <span class="food-tag must">老陈醋焖牛肉</span>
+                                <span class="food-tag must">牛肉铜火锅</span>
+                                <span class="food-tag">酸汤莜面</span>
+                            </div>
+                            <div class="tl-price">人均 ¥71 · 4人约 ¥290</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item sight">
+                    <div class="tl-time">20:00</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-moon"></i></div>
+                        <div class="tl-body">
+                            <h3>🌃 平遥古城夜景</h3>
+                            <p>灯笼亮起 · 南大街漫步 · 市楼夜景打卡</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan B · Day 2 -->
+        <section class="section day-section">
+            <div class="day-header">
+                <div class="day-number">DAY 2</div>
+                <div class="day-info">
+                    <h2>4月5日 · 周日</h2>
+                    <p class="day-theme">平遥古城全天深度游</p>
+                </div>
+                <div class="day-weather">⛅ 5~22°C</div>
+            </div>
+            <div class="timeline">
+                <div class="tl-item sight">
+                    <div class="tl-time">08:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-chess-rook"></i></div>
+                        <div class="tl-body">
+                            <h3>平遥古城墙</h3>
+                            <p>中国最完整古城墙 · 下西门登城<br>走1/4圈俯瞰古城全貌</p>
+                            <div class="tl-meta">
+                                <span class="meta-item">联票 ¥125/人</span>
+                            </div>
+                            <div class="tl-price">4人联票 ¥500</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item sight">
+                    <div class="tl-time">09:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-building-columns"></i></div>
+                        <div class="tl-body">
+                            <h3>日升昌票号</h3>
+                            <p>中国第一家票号（银行前身）<br>晋商汇兑天下的辉煌起点</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item sight">
+                    <div class="tl-time">10:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-gavel"></i></div>
+                        <div class="tl-body">
+                            <h3>平遥县衙</h3>
+                            <p>中国最完整古县衙 · 可能有升堂表演</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item sight">
+                    <div class="tl-time">11:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-vault"></i></div>
+                        <div class="tl-body">
+                            <h3>协同庆钱庄 + 文庙</h3>
+                            <p>地下金库 · 中国最大文庙</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item food">
+                    <div class="tl-time">12:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="tl-body">
+                            <h3>古城内午餐</h3>
+                            <p>南大街/西大街随意选一家本地馆子</p>
+                            <div class="tl-price">人均 ¥50 · 4人约 ¥200</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item sight">
+                    <div class="tl-time">14:00</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-person-walking"></i></div>
+                        <div class="tl-body">
+                            <h3>下午自由探索</h3>
+                            <p>镖局 · 漆器店 · 巷子拍照 · 买老陈醋</p>
+                            <div class="tl-tip">💡 全天在平遥，不赶时间，慢慢逛</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item food">
+                    <div class="tl-time">18:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card has-img">
+                        <img class="tl-card-img" src="https://aos-comment.amap.com/B0IBR5W005/comment/95BC964F_41BD_4229_A330_5F6F0E533067_L0_001_2142_214_1755345861078_04279994.jpg" alt="人在北方菜馆">
+                        <div class="tl-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="tl-body">
+                            <h3>人在北方菜馆 <span class="rating">⭐ 4.8</span></h3>
+                            <p class="address"><i class="fa-solid fa-location-dot"></i> 南大街98号</p>
+                            <div class="food-tags">
+                                <span class="food-tag must">传统过油肉</span>
+                                <span class="food-tag">碗托</span>
+                                <span class="food-tag">黄米凉糕</span>
+                            </div>
+                            <div class="tl-price">人均 ¥50 · 4人约 ¥200</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item sight">
+                    <div class="tl-time">20:00</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-moon"></i></div>
+                        <div class="tl-body">
+                            <h3>🌃 古城夜景（第二晚）</h3>
+                            <p>换个角度逛 · 北大街 · 城隍庙</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan B · Day 3 -->
+        <section class="section day-section">
+            <div class="day-header">
+                <div class="day-number">DAY 3</div>
+                <div class="day-info">
+                    <h2>4月6日 · 周一</h2>
+                    <p class="day-theme">乔家大院 · 太原午饭 · 返京</p>
+                </div>
+                <div class="day-weather">☀️ 6~23°C</div>
+            </div>
+            <div class="timeline">
+                <div class="tl-item drive">
+                    <div class="tl-time">07:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-car"></i></div>
+                        <div class="tl-body">
+                            <h3>退房出发 → 乔家大院</h3>
+                            <p>平遥 → 乔家大院 · 24km · 33min</p>
+                            <div class="tl-tip">💡 乔家在平遥北边，回程顺路</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item sight">
+                    <div class="tl-time">08:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-landmark"></i></div>
+                        <div class="tl-body">
+                            <h3>乔家大院 <span class="rating">⭐ 4.7</span></h3>
+                            <p class="address"><i class="fa-solid fa-location-dot"></i> 祁县东观镇乔家堡村</p>
+                            <p>🎬 电影《大红灯笼高高挂》取景地<br>晋商大院文化 · 六大院落 · 精美砖雕木雕</p>
+                            <div class="tl-meta">
+                                <span class="meta-item">¥115/人</span>
+                                <span class="meta-item">08:30开门</span>
+                                <span class="meta-item">约2小时</span>
+                            </div>
+                            <div class="tl-price">4人门票 ¥460</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item drive">
+                    <div class="tl-time">10:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-car"></i></div>
+                        <div class="tl-body">
+                            <h3>自驾 乔家大院 → 太原</h3>
+                            <p>59km · 约1小时 · 经太原绕城到市区</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item food">
+                    <div class="tl-time">11:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card has-img">
+                        <img class="tl-card-img" src="https://aos-comment.amap.com/B015F0071D/comment/content_media_external_file_256057_ss__1765641062745_59703435.jpg" alt="太原面食店">
+                        <div class="tl-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="tl-body">
+                            <h3>太原面食店 <span class="rating">⭐ 4.5</span></h3>
+                            <p class="address"><i class="fa-solid fa-location-dot"></i> 解放路5号</p>
+                            <div class="food-tags">
+                                <span class="food-tag must">三鲜烧麦</span>
+                                <span class="food-tag">刀削面</span>
+                                <span class="food-tag">剔尖</span>
+                                <span class="food-tag">猫耳朵</span>
+                            </div>
+                            <div class="tl-price">人均 ¥45 · 4人约 ¥180</div>
+                            <div class="tl-tip">💡 回程路过太原，补上太原面食！</div>
+                            <div class="tl-alt">或选：<a href="#" class="alt-link">山西会馆</a>（⭐4.6 人均¥97）面食表演</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item drive">
+                    <div class="tl-time">12:30</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-car"></i></div>
+                        <div class="tl-body">
+                            <h3>🚗 自驾返京</h3>
+                            <p>太原 → G5京昆 → G4京港澳 → 北京<br>500km · 预计5.5h（含拥堵）</p>
+                            <div class="tl-tag">14:30 石家庄服务区 · 换人开</div>
+                            <div class="tl-tag">16:30 保定段服务区 · 再休息</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item milestone">
+                    <div class="tl-time">~18:00</div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-icon"><i class="fa-solid fa-house"></i></div>
+                        <div class="tl-body">
+                            <h3>🏠 回到北京 · 还车</h3>
+                            <p>⚠️ 12:30出发比方案A早半小时，避开晚高峰</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan B 预算 -->
+        <section class="section">
+            <h2 class="section-title"><i class="fa-solid fa-coins"></i> 费用总览</h2>
+            <div class="budget-card">
+                <div class="budget-row">
+                    <span class="budget-icon">🚗</span>
+                    <span class="budget-label">租车（3天SUV含险）</span>
+                    <span class="budget-total">¥1,200</span>
+                    <span class="budget-per">¥300</span>
+                </div>
+                <div class="budget-row">
+                    <span class="budget-icon">⛽</span>
+                    <span class="budget-label">油费（~1,100km · 含堵车）</span>
+                    <span class="budget-total">¥850</span>
+                    <span class="budget-per">¥213</span>
+                </div>
+                <div class="budget-row highlight-row">
+                    <span class="budget-icon">🛤️</span>
+                    <span class="budget-label">高速费</span>
+                    <span class="budget-total"><s>¥400</s> → 🎉免费</span>
+                    <span class="budget-per">¥0</span>
+                </div>
+                <div class="budget-row">
+                    <span class="budget-icon">🅿️</span>
+                    <span class="budget-label">停车（晋祠+乔家+服务区）</span>
+                    <span class="budget-total">¥80</span>
+                    <span class="budget-per">¥20</span>
+                </div>
+                <div class="budget-row">
+                    <span class="budget-icon">🎫</span>
+                    <span class="budget-label">门票（晋祠¥80 + 乔家¥115 + 平遥¥125）</span>
+                    <span class="budget-total">¥1,280</span>
+                    <span class="budget-per">¥320</span>
+                </div>
+                <div class="budget-row">
+                    <span class="budget-icon">🏨</span>
+                    <span class="budget-label">住宿（桔子¥426 × 2间 × 2晚）</span>
+                    <span class="budget-total">¥1,704</span>
+                    <span class="budget-per">¥426</span>
+                </div>
+                <div class="budget-row">
+                    <span class="budget-icon">🍽️</span>
+                    <span class="budget-label">餐饮（5正餐 + 零食饮料）</span>
+                    <span class="budget-total">¥1,100</span>
+                    <span class="budget-per">¥275</span>
+                </div>
+                <div class="budget-header-row">
+                    <span></span>
+                    <span></span>
+                    <span class="col-title">4人合计</span>
+                    <span class="col-title">人均</span>
+                </div>
+                <div class="budget-total-row">
+                    <span class="budget-icon">💰</span>
+                    <span class="budget-label">合计</span>
+                    <span class="budget-total-num">¥6,214</span>
+                    <span class="budget-per-num">≈ ¥1,554</span>
+                </div>
+            </div>
+        </section>
+        </div><!-- /plan-b -->
 
         <!-- 美食指南 -->
         <section id="food" class="section">

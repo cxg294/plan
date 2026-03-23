@@ -742,6 +742,91 @@ body {
 }
 
 /* ============================== */
+/* 方案切换器 */
+/* ============================== */
+.plan-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 2rem 0 0.5rem;
+    padding: 16px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.plan-toggle-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 18px;
+    border-radius: 12px;
+    transition: all 0.3s;
+    user-select: none;
+}
+
+.plan-toggle-label.active {
+    background: var(--gradient);
+    color: white;
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
+}
+
+.plan-toggle-label:not(.active) {
+    color: var(--text-light);
+    background: #f5f0ea;
+}
+
+.plan-toggle-label:not(.active):hover {
+    background: #ebe5db;
+}
+
+.plan-toggle-switch {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    background: var(--primary-light);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex-shrink: 0;
+}
+
+.plan-toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.plan-toggle-switch.plan-b::after {
+    transform: translateX(24px);
+}
+
+.plan-toggle-switch.plan-b {
+    background: #2E7D32;
+}
+
+.plan-toggle-desc {
+    display: block;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+}
+
+/* 方案内容切换 */
+.plan-content { display: block; }
+.plan-content.hidden { display: none; }
+
+/* ============================== */
 /* 页脚 */
 /* ============================== */
 .footer {
