@@ -156,6 +156,6 @@ function updateHeroStats(plan) {
     } else {
         // 方案B: 里程~1100km, 人均¥1,554
         if (stats[2]) stats[2].textContent = '~1,100km';
-        if (stats[3]) stats[3].textContent = '人均¥1,554';
+        if (stats[3]) stats[3].textContent = '人均¥1,760';
     }
 }
