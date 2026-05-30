@@ -86,6 +86,7 @@
   .tips li{font-size:13.5px;color:#78350f;margin:3px 0;line-height:1.5}
 
   .footer{text-align:center;margin-top:40px;font-size:11px;color:var(--g600);opacity:.6}
+  .map-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--g600);color:#fff;border-radius:50%;font-size:10px;font-weight:800;margin-left:4px;flex-shrink:0}.map-badge.hotel{background:var(--river)}
 
   .weather-note{display:flex;align-items:center;gap:6px;background:var(--rain-bg);color:#4338ca;font-size:12px;padding:4px 12px;border-radius:10px;font-weight:600}
 </style>
@@ -124,47 +125,47 @@
   </div>
   <div class="stops">
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 出发</span></div>
+      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 出发</span><span class="map-badge">H</span></div>
       <div class="stop-desc">早上出发，天气好</div>
     </div>
     <div class="connector"><span class="mode walk">🚶 步行</span> <span class="arrow">→</span> <span class="detail">0.1km · <strong>2min</strong> · 同一条街</span></div>
 
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🥟</span><span class="stop-name">广州酒家（天字码头店）</span><span class="stop-tag tag-food">早茶</span></div>
+      <div class="stop-header"><span class="stop-emoji">🥟</span><span class="stop-name">广州酒家（天字码头店）<span class="map-badge">1</span></span><span class="stop-tag tag-food">早茶</span></div>
       <div class="stop-desc">沿江中路 233 号。广州酒家本家。⭐4.6 · 人均 94 元</div>
       <div class="stop-photo">虾饺近景、窗边江景早茶</div>
     </div>
     <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">5.0km · <strong>18min</strong> · ~20元</span></div>
 
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🏛️</span><span class="stop-name">陈家祠</span><span class="stop-tag tag-culture">文化</span></div>
+      <div class="stop-header"><span class="stop-emoji">🏛️</span><span class="stop-name">陈家祠</span><span class="map-badge">2</span><span class="stop-tag tag-culture">文化</span></div>
       <div class="stop-desc">岭南建筑艺术明珠。门票 10 元，约 1 小时</div>
       <div class="stop-photo">砖雕特写、屋脊灰塑、中庭全景</div>
     </div>
     <div class="connector"><span class="mode walk">🚶 步行</span> <span class="arrow">→</span> <span class="detail">穿过老城区 · 边走边逛</span></div>
 
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🥢</span><span class="stop-name">上下九步行街</span><span class="stop-tag tag-food">小吃</span></div>
+      <div class="stop-header"><span class="stop-emoji">🥢</span><span class="stop-name">上下九步行街</span><span class="map-badge">3</span><span class="stop-tag tag-food">小吃</span></div>
       <div class="stop-desc">陈添记鱼皮 · 南信双皮奶 · 顺记冰室</div>
       <div class="stop-photo">骑楼长街、鱼皮特写、双皮奶</div>
     </div>
     <div class="connector"><span class="mode walk">🚶 步行</span> <span class="arrow">→</span> <span class="detail">0.9km · <strong>11min</strong> · 骑楼街景</span></div>
 
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">📸</span><span class="stop-name">沙面岛</span><span class="stop-tag tag-photo">拍照</span></div>
+      <div class="stop-header"><span class="stop-emoji">📸</span><span class="stop-name">沙面岛</span><span class="map-badge">4</span><span class="stop-tag tag-photo">拍照</span></div>
       <div class="stop-desc">欧陆建筑群 + 古榕树大道。免费，约 1–1.5 小时</div>
       <div class="stop-photo">教堂正面、古榕树大道、江边长椅</div>
     </div>
     <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">3.2km · <strong>11min</strong> · 起步价 · 沿江回</span></div>
 
     <div class="stop rest">
-      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 休息</span><span class="stop-tag tag-rest">休整</span></div>
+      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 休息</span><span class="map-badge hotel">H</span><span class="stop-tag tag-rest">休整</span></div>
       <div class="stop-desc">回酒店歇脚，约 1–2 小时</div>
     </div>
     <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">1.6km · <strong>8min</strong> · 起步价</span></div>
 
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🐟</span><span class="stop-name">顺得来（中山五路店）</span><span class="stop-tag tag-food">晚餐</span></div>
+      <div class="stop-header"><span class="stop-emoji">🐟</span><span class="stop-name">顺得来（中山五路店）<span class="map-badge">5</span></span><span class="stop-tag tag-food">晚餐</span></div>
       <div class="stop-desc">脆肉鲩专门店。⭐4.7 · 人均约 100 元</div>
       <div class="stop-photo">脆肉鲩鱼片、打边炉热气</div>
     </div>
@@ -210,13 +211,13 @@
   </div>
   <div class="stops">
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 退房出发</span></div>
+      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 退房出发<span class="map-badge hotel">H</span></span></div>
       <div class="stop-desc">行李随身带。早上如果下雨，带伞</div>
     </div>
     <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">7.8km · <strong>16min</strong> · ~30元 · 过江</span></div>
 
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🛍️</span><span class="stop-name">K11 购物艺术中心</span><span class="stop-tag tag-photo">逛街</span></div>
+      <div class="stop-header"><span class="stop-emoji">🛍️</span><span class="stop-name">K11 购物艺术中心<span class="map-badge">1</span></span><span class="stop-tag tag-photo">逛街</span></div>
       <div class="stop-desc">商场像美术馆，逛一圈喝杯咖啡。约 1–1.5 小时</div>
       <div class="stop-photo">艺术装置、LOFT走廊</div>
       <div class="rain-note">全室内，下雨也不影响</div>
@@ -226,12 +227,12 @@
     <div class="highlight"><strong>🦐 午餐 — 二选一</strong></div>
     <div class="split-row">
       <div class="split-card"><h4>潮大嫂 ⭐4.5/103元</h4><p>金穗路28号 · 🚗 K11 <strong>16min</strong></p><p>生腌膏蟹 · 腌虾 · 血蚶</p></div>
-      <div class="split-card"><h4>潮福(天河店) ⭐4.6/96元</h4><p>体育东横街 · 🚗 K11 <strong>10min</strong></p><p>评分更高、更便宜、离 K11 更近</p><p style="font-size:12px;color:var(--g600)">📞 020-37884920</p></div>
+      <div class="split-card"><h4>潮福(天河店) ⭐4.6/96元<span class="map-badge hotel">F</span></h4><p>体育东横街 · 🚗 K11 <strong>10min</strong></p><p>评分更高、更便宜、离 K11 更近</p><p style="font-size:12px;color:var(--g600)">📞 020-37884920</p></div>
     </div>
     <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">3.7km · <strong>19min</strong> · ~18元</span></div>
 
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🚶</span><span class="stop-name">东山口</span><span class="stop-tag tag-photo">拍照</span></div>
+      <div class="stop-header"><span class="stop-emoji">🚶</span><span class="stop-name">东山口</span><span class="map-badge">3</span><span class="stop-tag tag-photo">拍照</span></div>
       <div class="stop-desc">民国红砖洋楼群 + 独立咖啡馆。约 1–1.5 小时</div>
       <div class="stop-photo">红砖洋楼、绿荫小巷</div>
       <div class="rain-note">如果雨没停就跳过东山口，直接从餐厅打车 17min 到广州站</div>
@@ -239,7 +240,7 @@
     <div class="connector"><span class="mode metro">🚇 地铁</span> <span class="arrow">→</span> <span class="detail">1号线直达 · <strong>32min</strong> · 3元</span></div>
 
     <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🚉</span><span class="stop-name">广州站 · 19:00 卧铺回家</span></div>
+      <div class="stop-header"><span class="stop-emoji">🚉</span><span class="stop-name">广州站 · 19:00 卧铺回家<span class="map-badge">4</span></span></div>
       <div class="stop-desc">时间宽裕</div>
     </div>
   </div>
