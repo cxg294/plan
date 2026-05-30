@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>广州2天1晚 · 美食轻游</title>
+<style>
+  :root{--g900:#1b4332;--g800:#2d6a4f;--g700:#40916c;--g600:#52b788;--g500:#74c69d;--g400:#95d5b2;--g300:#b7e4c7;--g200:#d8f3dc;--g100:#f0fdf4;--gold:#e9c46a;--warm:#f4a261;--dk:#1a1a2e;--gy:#6b7280;--river:#0ea5e9;--river-bg:#e0f2fe;--rain:#6366f1;--rain-bg:#eef2ff}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(175deg,#ecfdf5 0%,#e8f5e9 30%,#f0f9ff 100%);color:var(--dk);line-height:1.7;min-height:100vh}
+  .container{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+
+  .hero{text-align:center;padding:48px 0 36px}
+  .hero .badge{display:inline-block;background:var(--g700);color:#fff;font-size:12px;font-weight:600;letter-spacing:.08em;padding:4px 14px;border-radius:20px;margin-bottom:14px}
+  .hero h1{font-size:2.4rem;font-weight:800;color:var(--g900);margin-bottom:4px}
+  .hero .sub{font-size:1rem;color:var(--g700);font-weight:500}
+
+  .hotel-card{background:#fff;border-radius:20px;padding:28px;margin-bottom:28px;box-shadow:0 4px 24px rgba(14,165,233,0.08);border:1px solid #bae6fd;display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+  .hotel-icon{width:52px;height:52px;background:linear-gradient(135deg,var(--river),#0284c7);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+  .hotel-info{flex:1;min-width:200px}
+  .hotel-info h3{font-size:1.1rem;color:#0c4a6e;margin-bottom:2px}
+  .hotel-info .stars{color:var(--gold);font-size:13px;letter-spacing:2px}
+  .hotel-info .addr{color:var(--gy);font-size:13px;margin-top:2px}
+  .hotel-perks{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .hotel-perks span{background:var(--river-bg);color:#0369a1;font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px}
+
+  .day-section{margin-bottom:36px}
+  .day-header{display:flex;align-items:baseline;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+  .day-title{font-size:1.4rem;font-weight:700;color:var(--g900)}
+  .day-theme{font-size:14px;color:var(--g600);font-weight:500}
+
+  .stops{position:relative;padding-left:38px}
+  .stops::before{content:'';position:absolute;left:13px;top:20px;bottom:20px;width:2px;background:linear-gradient(to bottom,var(--g400),var(--g600),var(--g400));border-radius:1px}
+  .stop{background:#fff;border-radius:14px;padding:18px 22px;box-shadow:0 2px 10px rgba(27,67,50,0.04);border:1px solid var(--g200);position:relative;transition:transform .15s}
+  .stop:hover{transform:translateX(3px);box-shadow:0 4px 18px rgba(27,67,50,0.09)}
+  .stop::before{content:'';position:absolute;left:-32px;top:26px;width:9px;height:9px;background:var(--g600);border-radius:50%;box-shadow:0 0 0 4px var(--g200)}
+  .stop.rainy::before{background:var(--rain);box-shadow:0 0 0 4px var(--rain-bg)}
+  .stop.rainy{border-color:#c7d2fe;border-style:dashed}
+  .stop.rest::before{background:#94a3b8;box-shadow:0 0 0 4px #e2e8f0}
+  .stop.rest{border-color:#cbd5e1}
+  .stop-header{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+  .stop-emoji{font-size:1.3rem}
+  .stop-name{font-weight:700;font-size:1rem;color:var(--g900)}
+  .stop-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:8px;letter-spacing:.03em}
+  .tag-free{background:#d1fae5;color:#065f46}.tag-food{background:#fef3c7;color:#92400e}
+  .tag-photo{background:#dbeafe;color:#1e40af}.tag-culture{background:#ede9fe;color:#5b21b6}
+  .tag-hotel{background:#e0e7ff;color:#3730a3}.tag-rain{background:var(--rain-bg);color:#4338ca}
+  .tag-rest{background:#e2e8f0;color:#475569}
+  .stop-desc{color:var(--gy);font-size:13.5px;margin-top:2px}
+  .stop-photo{font-size:12px;color:var(--g600);margin-top:4px;display:flex;align-items:center;gap:4px}
+  .stop-photo::before{content:'📷'}
+  .rain-note{font-size:12px;color:var(--rain);margin-top:4px;display:flex;align-items:center;gap:4px}
+  .rain-note::before{content:'🌧️'}
+
+  .connector{display:flex;align-items:center;gap:6px;padding:8px 0 8px 22px;margin:-1px 0;position:relative;z-index:1}
+  .connector .mode{display:inline-flex;align-items:center;gap:4px;padding:3px 11px;border-radius:16px;font-size:12.5px;font-weight:600}
+  .connector .mode.taxi{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+  .connector .mode.walk{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+  .connector .mode.walk-rain{background:var(--rain-bg);border:1px solid #c7d2fe;color:#4338ca}
+  .connector .mode.metro{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+  .connector .arrow{color:var(--g400);font-weight:700;font-size:13px}
+  .connector .detail{font-size:12.5px;color:var(--gy)}
+
+  .highlight{background:linear-gradient(135deg,#fef3c7,#fef9e7);border-radius:14px;padding:14px 20px;margin:10px 0 10px 22px;border:1px solid #fde68a;font-size:13px;position:relative;z-index:1}
+  .highlight.rain{background:linear-gradient(135deg,var(--rain-bg),#e0e7ff);border-color:#c7d2fe}
+
+  .map-section{margin:28px 0}
+  .map-container{width:100%;height:380px;border-radius:16px;overflow:hidden;border:2px solid var(--g300);box-shadow:0 4px 20px rgba(27,67,50,0.08)}
+  .map-label{font-size:13px;font-weight:600;color:var(--g700);margin-bottom:8px}
+
+  .split-row{display:flex;gap:12px;margin:8px 0 8px 22px;position:relative;z-index:1;flex-wrap:wrap}
+  .split-card{flex:1;min-width:200px;background:#fff;border:2px solid var(--g300);border-radius:12px;padding:14px 16px}
+  .split-card h4{font-weight:700;color:var(--g800);margin-bottom:6px;font-size:14px}
+  .split-card p{font-size:13px;color:var(--gy);margin:3px 0}
+
+  .budget{background:#fff;border-radius:18px;padding:26px;margin-top:36px;box-shadow:0 4px 20px rgba(27,67,50,0.07);border:1px solid var(--g300)}
+  .budget h2{font-size:1.2rem;color:var(--g900);margin-bottom:16px}
+  .budget-table{width:100%;border-collapse:collapse}
+  .budget-table td{padding:7px 0;font-size:14.5px;border-bottom:1px solid var(--g100)}
+  .budget-table td:last-child{text-align:right;font-weight:600;color:var(--g800)}
+  .budget-table .total td{border-top:2px solid var(--g300);border-bottom:none;font-size:1.1rem;font-weight:800;color:var(--g900);padding-top:12px}
+
+  .tips{background:linear-gradient(135deg,#fef3c7,#fef9e7);border-radius:14px;padding:18px 22px;margin-top:24px;border:1px solid #fde68a}
+  .tips h3{font-size:14px;color:#92400e;margin-bottom:8px}
+  .tips ul{padding-left:18px}
+  .tips li{font-size:13.5px;color:#78350f;margin:3px 0;line-height:1.5}
+
+  .footer{text-align:center;margin-top:40px;font-size:11px;color:var(--g600);opacity:.6}
+
+  .weather-note{display:flex;align-items:center;gap:6px;background:var(--rain-bg);color:#4338ca;font-size:12px;padding:4px 12px;border-radius:10px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+  <div class="badge">高德API 全路线校验</div>
+  <h1>广州 2天1晚</h1>
+  <div class="sub">基地：全季天字码头 · 江景房 · 打车优先</div>
+</div>
+
+<!-- ═══ 酒店 ═══ -->
+<div class="hotel-card">
+  <div class="hotel-icon">🌊</div>
+  <div class="hotel-info">
+    <h3>全季酒店（天字码头店）</h3>
+    <div class="stars">★★★★★ 4.6 · 江景房</div>
+    <div class="addr">沿江中路 259 号 · 天字码头旁 · 珠江畔</div>
+    <div class="hotel-perks">
+      <span>🌊 珠江边 0min</span>
+      <span>🚶 广州酒家 2min</span>
+      <span>🚶 北京路 8min</span>
+      <span>🚗 顺得来 8min</span>
+      <span>🚗 沙面 11min</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DAY 1 ═══ -->
+<div class="day-section">
+  <div class="day-header">
+    <span class="day-title">🌅 Day 1 · 今天</span>
+    <span class="day-theme">广州酒家早茶 → 老城全线 → 回酒店休整 → 顺得来鱼鲜</span>
+  </div>
+  <div class="stops">
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 出发</span></div>
+      <div class="stop-desc">早上出发，天气好</div>
+    </div>
+    <div class="connector"><span class="mode walk">🚶 步行</span> <span class="arrow">→</span> <span class="detail">0.1km · <strong>2min</strong> · 同一条街</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🥟</span><span class="stop-name">广州酒家（天字码头店）</span><span class="stop-tag tag-food">早茶</span></div>
+      <div class="stop-desc">沿江中路 233 号。广州酒家本家。⭐4.6 · 人均 94 元</div>
+      <div class="stop-photo">虾饺近景、窗边江景早茶</div>
+    </div>
+    <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">5.0km · <strong>18min</strong> · ~20元</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🏛️</span><span class="stop-name">陈家祠</span><span class="stop-tag tag-culture">文化</span></div>
+      <div class="stop-desc">岭南建筑艺术明珠。门票 10 元，约 1 小时</div>
+      <div class="stop-photo">砖雕特写、屋脊灰塑、中庭全景</div>
+    </div>
+    <div class="connector"><span class="mode walk">🚶 步行</span> <span class="arrow">→</span> <span class="detail">穿过老城区 · 边走边逛</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🥢</span><span class="stop-name">上下九步行街</span><span class="stop-tag tag-food">小吃</span></div>
+      <div class="stop-desc">陈添记鱼皮 · 南信双皮奶 · 顺记冰室</div>
+      <div class="stop-photo">骑楼长街、鱼皮特写、双皮奶</div>
+    </div>
+    <div class="connector"><span class="mode walk">🚶 步行</span> <span class="arrow">→</span> <span class="detail">0.9km · <strong>11min</strong> · 骑楼街景</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">📸</span><span class="stop-name">沙面岛</span><span class="stop-tag tag-photo">拍照</span></div>
+      <div class="stop-desc">欧陆建筑群 + 古榕树大道。免费，约 1–1.5 小时</div>
+      <div class="stop-photo">教堂正面、古榕树大道、江边长椅</div>
+    </div>
+    <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">3.2km · <strong>11min</strong> · 起步价 · 沿江回</span></div>
+
+    <div class="stop rest">
+      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 休息</span><span class="stop-tag tag-rest">休整</span></div>
+      <div class="stop-desc">回酒店歇脚，约 1–2 小时</div>
+    </div>
+    <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">1.6km · <strong>8min</strong> · 起步价</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🐟</span><span class="stop-name">顺得来（中山五路店）</span><span class="stop-tag tag-food">晚餐</span></div>
+      <div class="stop-desc">脆肉鲩专门店。⭐4.7 · 人均约 100 元</div>
+      <div class="stop-photo">脆肉鲩鱼片、打边炉热气</div>
+    </div>
+
+    <!-- 晚间天气分流 -->
+    <div class="highlight"><strong>🔀 晚饭后 — 看天气</strong></div>
+    <div class="split-row">
+      <div class="split-card"><h4>☀️ 没下雨 → 散步回</h4><p>🚶 顺得来 → 北京路夜市 15min</p><p>🚶 北京路 → 珠江边 → 酒店 8min</p><p>晚饭后不用打车，全程步行</p></div>
+      <div class="split-card" style="border:2px dashed #c7d2fe"><h4 style="color:var(--rain)">🌧️ 下雨了 → 打车回</h4><p>🚗 顺得来 → 酒店 <strong>9min</strong> 起步价</p><p>🛌 窗边看珠江雨幕</p></div>
+    </div>
+
+    <div class="connector"><span class="mode walk">🚶 散步</span> <span class="arrow">或</span> <span class="mode walk-rain">🌧️ 打车</span> <span class="arrow">→</span> <span class="detail">回酒店</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🛌</span><span class="stop-name">全季酒店</span></div>
+      <div class="stop-desc">江景房休息。不下雨就顺路逛北京路+珠江边</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 1 Map -->
+<div class="map-section">
+  <div class="map-label">🗺️ Day 1 路线 · 可缩放拖动</div>
+  <div class="map-container" id="map-d1"></div>
+  <div style="font-size:11px;color:var(--gy);text-align:center;margin-top:6px">
+    H=酒店 · 绿色=主线 · 灰色虚线=休整回程 · 紫色虚线=雨天备选
+  </div>
+</div>
+
+<!-- ═══ DAY 2 ═══ -->
+<div class="day-section">
+  <div class="day-header">
+    <span class="day-title">🌧️ Day 2 · 明天</span>
+    <span class="day-theme">退房 → 过江 K11 → 生腌午餐 → 东山口 → 返程</span>
+    <span class="weather-note">🌧️ 预报早上有雨</span>
+  </div>
+  <div class="stops">
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🏨</span><span class="stop-name">全季酒店 · 退房出发</span></div>
+      <div class="stop-desc">行李随身带。早上如果下雨，带伞</div>
+    </div>
+    <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">7.8km · <strong>16min</strong> · ~30元 · 过江</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🛍️</span><span class="stop-name">K11 购物艺术中心</span><span class="stop-tag tag-photo">逛街</span></div>
+      <div class="stop-desc">商场像美术馆，逛一圈喝杯咖啡。约 1–1.5 小时</div>
+      <div class="stop-photo">艺术装置、LOFT走廊</div>
+      <div class="rain-note">全室内，下雨也不影响</div>
+    </div>
+    <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">2.8km · <strong>16min</strong> · 起步价</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🦐</span><span class="stop-name">潮大嫂潮汕生腌（珠江新城店）</span><span class="stop-tag tag-food">午餐</span></div>
+      <div class="stop-desc">生腌膏蟹 · 腌虾 · 血蚶。也有熟腌和砂锅粥。⭐4.5 · 人均 103 元</div>
+      <div class="stop-photo">生腌虾特写、砂锅粥冒泡</div>
+    </div>
+    <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">3.7km · <strong>19min</strong> · ~18元</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🚶</span><span class="stop-name">东山口</span><span class="stop-tag tag-photo">拍照</span></div>
+      <div class="stop-desc">民国红砖洋楼群 + 独立咖啡馆。约 1–1.5 小时</div>
+      <div class="stop-photo">红砖洋楼、绿荫小巷</div>
+      <div class="rain-note">如果雨没停就跳过，潮大嫂直接打车 17min 到广州站</div>
+    </div>
+    <div class="connector"><span class="mode metro">🚇 地铁</span> <span class="arrow">→</span> <span class="detail">1号线直达 · <strong>32min</strong> · 3元</span></div>
+
+    <div class="stop">
+      <div class="stop-header"><span class="stop-emoji">🚉</span><span class="stop-name">广州站 · 19:00 卧铺回家</span></div>
+      <div class="stop-desc">时间宽裕</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 2 Map -->
+<div class="map-section">
+  <div class="map-label">🗺️ Day 2 路线 · 可缩放拖动</div>
+  <div class="map-container" id="map-d2"></div>
+  <div style="font-size:11px;color:var(--gy);text-align:center;margin-top:6px">
+    H=酒店 · 橙色=过江段 · 紫色虚线=雨天直达
+  </div>
+</div>
+
+<!-- ═══ BUDGET ═══ -->
+<div class="budget">
+  <h2>💰 预算估算</h2>
+  <table class="budget-table">
+    <tr><td>🏨 全季天字码头 1 晚（江景）</td><td>350 – 500 元</td></tr>
+    <tr><td>🥟 广州酒家早茶</td><td>~94 元</td></tr>
+    <tr><td>🎫 陈家祠门票</td><td>10 元</td></tr>
+    <tr><td>🥢 上下九小吃</td><td>~40 元</td></tr>
+    <tr><td>🐟 顺得来晚餐</td><td>~100 元</td></tr>
+    <tr><td>🦐 潮大嫂生腌</td><td>~103 元</td></tr>
+    <tr><td>🚗 打车（约 6–7 程）</td><td>~110 – 150 元</td></tr>
+    <tr><td>🚇 地铁（回程）</td><td>3 元</td></tr>
+    <tr class="total"><td>合计</td><td>~850 – 1,050 元</td></tr>
+  </table>
+</div>
+
+<div class="tips">
+  <h3>💡 提醒</h3>
+  <ul>
+    <li><strong>广州酒家：</strong>现在就可以走过去，2min，吃个早茶出发</li>
+    <li><strong>老城步行：</strong>陈家祠→上下九→沙面约 3km，沿老城一路不回头</li>
+    <li><strong>顺得来：</strong>⭐4.7，晚餐时段建议提前打电话订位</li>
+    <li><strong>行李：</strong>Day 2 退房后随身带，全程打车不累</li>
+    <li><strong>生腌：</strong>小份生腌虾，别空腹吃，熟腌砂锅粥兜底</li>
+  </ul>
+</div>
+
+<div class="footer">所有路线耗时由高德地图 API 精确计算 · 坐标先行校验</div>
+
+</div>
+
+<script>
+window._AMapSecurityConfig = { securityJsCode: '951e81e1dcbe1bcec90ae6eb160997d6' };
+</script>
+<script src="https://webapi.amap.com/maps?v=2.0&key=4f4b242f275c2ed27e2b0af25b4e8717"></script>
+<script>
+(function(){
+  if(typeof AMap==='undefined'){return}
+  var green='#52b788', orange='#f4a261', blue='#0ea5e9', purple='#6366f1', gray='#94a3b8';
+
+  function mkr(l,c,n){return'<div style="background:'+c+';color:#fff;padding:3px 8px;border-radius:11px;font-size:11px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.18)">'+l+'</div>'}
+  function addM(map,s,c){var m=new AMap.Marker({position:[s.lng,s.lat],content:mkr(s.label,c,s.name),anchor:'bottom-center',offset:new AMap.Pixel(0,-4)});m.setMap(map);m.on('click',function(){new AMap.InfoWindow({content:'<div style="padding:6px 10px;font-size:13px;font-weight:600">'+s.label+' '+s.name+'</div>',offset:new AMap.Pixel(0,-28)}).open(map,[s.lng,s.lat])})}
+  function addL(map,a,b,c,w,o,d){new AMap.Polyline({path:[[a.lng,a.lat],[b.lng,b.lat]],strokeColor:c,strokeWeight:w,strokeOpacity:o,strokeStyle:d?'dashed':'solid',lineJoin:'round'}).setMap(map)}
+
+  var d1=[
+    {label:'H',name:'全季酒店',lat:23.115483,lng:113.272662},
+    {label:'1',name:'广州酒家',lat:23.115222,lng:113.271653},
+    {label:'2',name:'陈家祠',lat:23.12705,lng:113.24693},
+    {label:'3',name:'上下九',lat:23.113624,lng:113.245921},
+    {label:'4',name:'沙面岛',lat:23.106802,lng:113.244707},
+    {label:'H',name:'全季酒店',lat:23.115483,lng:113.272662},
+    {label:'5',name:'顺得来',lat:23.126267,lng:113.266611},
+    {label:'H',name:'全季酒店',lat:23.115483,lng:113.272662}
+  ];
+  var m1=new AMap.Map('map-d1',{zoom:12,center:[23.12,113.27],mapStyle:'amap://styles/light',viewMode:'2D'});
+  for(var i=1;i<d1.length;i++){var a=d1[i-1],b=d1[i];if(i===5)addL(m1,a,b,gray,3,.5,true);else if(i===7)addL(m1,a,b,purple,2.5,.4,true);else addL(m1,a,b,green,4,.7,false)}
+  d1.forEach(function(s){addM(m1,s,s.label==='H'?blue:green)});m1.setFitView(null,false,[40,40,40,40]);
+
+  var d2=[
+    {label:'H',name:'全季酒店',lat:23.115483,lng:113.272662},
+    {label:'1',name:'K11',lat:23.119237,lng:113.323523},
+    {label:'2',name:'潮大嫂',lat:23.12374,lng:113.317517},
+    {label:'3',name:'东山口',lat:23.126,lng:113.293},
+    {label:'4',name:'广州站',lat:23.149243,lng:113.257331}
+  ];
+  var m2=new AMap.Map('map-d2',{zoom:12,center:[23.13,113.30],mapStyle:'amap://styles/light',viewMode:'2D'});
+  for(var j=1;j<d2.length;j++)addL(m2,d2[j-1],d2[j],orange,4,.7,false);
+  addL(m2,d2[2],d2[4],purple,2.5,.4,true);
+  d2.forEach(function(s){addM(m2,s,s.label==='H'?blue:orange)});m2.setFitView(null,false,[40,40,40,40]);
+})();
+</script>
+</body>
+</html>
