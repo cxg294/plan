@@ -170,6 +170,13 @@
     </div>
 
     <!-- 晚间天气分流 -->
+    <div class="highlight"><strong>🐟 鱼生备选：渔意如意·金鲷顺德鱼生</strong> ⭐4.7/126元</div>
+    <div style="margin:0 0 8px 22px;padding:10px 14px;background:#fff;border:1px solid #dbeafe;border-radius:10px;font-size:13px;color:var(--gy);position:relative;z-index:1">
+      金鲷是海鱼，寄生虫风险低。🚗 顺得来打车 <strong>19min</strong> 或从酒店直接去 <strong>13min</strong>。<br>
+      电话 15622731821 · 东晓路雅墩街9号<br>
+      <span style="font-size:12px;color:var(--g600)">💡 如果想给朋友带小份海鱼鱼生，这家比淡水鱼生安全。也可以作为顺得来的晚餐替代。</span>
+    </div>
+
     <div class="highlight"><strong>🔀 晚饭后 — 看天气</strong></div>
     <div class="split-row">
       <div class="split-card"><h4>☀️ 没下雨 → 散步回</h4><p>🚶 顺得来 → 北京路夜市 15min</p><p>🚶 北京路 → 珠江边 → 酒店 8min</p><p>晚饭后不用打车，全程步行</p></div>
@@ -216,10 +223,10 @@
     </div>
     <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">2.8km · <strong>16min</strong> · 起步价</span></div>
 
-    <div class="stop">
-      <div class="stop-header"><span class="stop-emoji">🦐</span><span class="stop-name">潮大嫂潮汕生腌（珠江新城店）</span><span class="stop-tag tag-food">午餐</span></div>
-      <div class="stop-desc">生腌膏蟹 · 腌虾 · 血蚶。也有熟腌和砂锅粥。⭐4.5 · 人均 103 元</div>
-      <div class="stop-photo">生腌虾特写、砂锅粥冒泡</div>
+    <div class="highlight"><strong>🦐 午餐 — 二选一</strong></div>
+    <div class="split-row">
+      <div class="split-card"><h4>潮大嫂 ⭐4.5/103元</h4><p>金穗路28号 · 🚗 K11 <strong>16min</strong></p><p>生腌膏蟹 · 腌虾 · 血蚶</p></div>
+      <div class="split-card"><h4>潮福(天河店) ⭐4.6/96元</h4><p>体育东横街 · 🚗 K11 <strong>10min</strong></p><p>评分更高、更便宜、离 K11 更近</p><p style="font-size:12px;color:var(--g600)">📞 020-37884920</p></div>
     </div>
     <div class="connector"><span class="mode taxi">🚗 打车</span> <span class="arrow">→</span> <span class="detail">3.7km · <strong>19min</strong> · ~18元</span></div>
 
@@ -227,7 +234,7 @@
       <div class="stop-header"><span class="stop-emoji">🚶</span><span class="stop-name">东山口</span><span class="stop-tag tag-photo">拍照</span></div>
       <div class="stop-desc">民国红砖洋楼群 + 独立咖啡馆。约 1–1.5 小时</div>
       <div class="stop-photo">红砖洋楼、绿荫小巷</div>
-      <div class="rain-note">如果雨没停就跳过，潮大嫂直接打车 17min 到广州站</div>
+      <div class="rain-note">如果雨没停就跳过东山口，直接从餐厅打车 17min 到广州站</div>
     </div>
     <div class="connector"><span class="mode metro">🚇 地铁</span> <span class="arrow">→</span> <span class="detail">1号线直达 · <strong>32min</strong> · 3元</span></div>
 
@@ -315,6 +322,9 @@ window._AMapSecurityConfig = { securityJsCode: '951e81e1dcbe1bcec90ae6eb160997d6
   var m2=new AMap.Map('map-d2',{zoom:12,center:[23.13,113.30],mapStyle:'amap://styles/light',viewMode:'2D'});
   for(var j=1;j<d2.length;j++)addL(m2,d2[j-1],d2[j],orange,4,.7,false);
   addL(m2,d2[2],d2[4],purple,2.5,.4,true);
+  // 潮福备选
+  addM(m2,{label:'F',name:'潮福(天河)',lat:23.128912,lng:113.332146},orange);
+  addL(m2,d2[1],{lat:23.128912,lng:113.332146},purple,2,.4,true);
   d2.forEach(function(s){addM(m2,s,s.label==='H'?blue:orange)});m2.setFitView(null,false,[40,40,40,40]);
 })();
 </script>
